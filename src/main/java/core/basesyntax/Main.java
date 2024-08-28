@@ -1,18 +1,35 @@
 package core.basesyntax;
 
+import core.basesyntax.handlers.DataConverterImpl;
+import core.basesyntax.handlers.FileReaderImpl;
+import core.basesyntax.handlers.FileWriterImpl;
+import core.basesyntax.handlers.OperationHandler;
+import core.basesyntax.handlers.ReportGeneratorImpl;
+import core.basesyntax.inerfaces.DataConverter;
+import core.basesyntax.inerfaces.FileReader;
+import core.basesyntax.inerfaces.FileWriter;
+import core.basesyntax.inerfaces.OperationStrategy;
+import core.basesyntax.inerfaces.ReportGenerator;
+import core.basesyntax.inerfaces.ShopService;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.services.BalanceOperation;
+import core.basesyntax.services.OperationStrategyImpl;
+import core.basesyntax.services.PurchaseOperation;
+import core.basesyntax.services.ReturnOperation;
+import core.basesyntax.services.ShopServiceImpl;
+import core.basesyntax.services.SupplyOperation;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final Map<String, Integer> shop = new HashMap<>();
 
     public static void main(String[] arg) throws IOException {
         // 1. Read the data from the input CSV file
-        List<String> inputReport = Files.readAllLines(Path.of("C:/txt/reportToRead.csv"));
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read("C:/txt/reportToRead.csv");
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -35,6 +52,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        Files.writeString(Path.of("C:/txt/finalReport.csv"), resultingReport);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, "C:/txt/finalReport.csv");
     }
 }

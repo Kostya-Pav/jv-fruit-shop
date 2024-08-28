@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.handlers;
+
+import core.basesyntax.inerfaces.DataConverter;
+import core.basesyntax.models.FruitTransaction;
 
 import java.util.List;
 

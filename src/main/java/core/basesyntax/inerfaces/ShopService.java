@@ -1,4 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.inerfaces;
+
+import core.basesyntax.models.FruitTransaction;
 
 import java.util.List;
 

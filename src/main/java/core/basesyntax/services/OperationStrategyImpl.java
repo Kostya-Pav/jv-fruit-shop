@@ -1,4 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.services;
+
+import core.basesyntax.handlers.OperationHandler;
+import core.basesyntax.inerfaces.OperationStrategy;
+import core.basesyntax.models.FruitTransaction;
 
 import java.util.Map;
 
@@ -10,7 +14,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void getHandler(FruitTransaction operation) {
-        map.get(operation.getActivity()).run(operation);
+    public OperationHandler getHandler(FruitTransaction operation) {
+       return map.get(operation.getActivity());
     }
 }
